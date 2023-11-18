@@ -1,7 +1,8 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from util.Constant import *
+from util.Constant import RED
+from util.Constant import GREEN
 import cv2
 
 

@@ -1,7 +1,7 @@
 import pygame
 
 
-def play():
+def play(name="beep"):
     pygame.mixer.init()
-    pygame.mixer.music.load("./data/beep.mp3")
+    pygame.mixer.music.load("./data/{}.mp3".format(name))
     pygame.mixer.music.play()

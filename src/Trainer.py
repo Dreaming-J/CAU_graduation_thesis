@@ -50,18 +50,11 @@ while isContinue():
     elif status == TRAINING_DATA:
         model, accuracy, status = trainData()
         if status == TRAINED_COMPLETE:
-            msg = "train complete, accuracy = {:.1f}%".format(accuracy)
+            msg = f"train complete, accuracy = {accuracy:.1f}%"
 
     elif status == TRAINED_COMPLETE:
-        isclosed = isClosed(model, shape_eyes)
-        drawText(frame, "EYE STATUS:", (0, 50))
-        if isclosed is True:
-            eye_status = "CLOSED"
-        elif isclosed is False:
-            eye_status = "OPEN"
-        else:
-            eye_status = ""
-        drawText(frame, eye_status, (160, 50))
+        (eye_status_msg, isclosed) = isClosed(model, shape_eyes)
+        drawText(frame, f"EYE STATUS: {eye_status_msg}", (0, 50))
 
     drawText(frame, msg, (0, 20))
     cv2.imshow("Model Trainer", frame)

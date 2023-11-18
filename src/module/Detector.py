@@ -1,9 +1,11 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from util.Constant import *
-from util.Variable import *
+from util.Constant import idx_eyes
+from util.Variable import detector
+from util.Variable import predictor
 import cv2
+from imutils import face_utils
 
 
 def detectEyes(frame):

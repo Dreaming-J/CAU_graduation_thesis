@@ -1,8 +1,8 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from util.Shuffler import *
-from util.SoundPlayer import *
+from util.Shuffler import shuffle
+from util.SoundPlayer import play
 from trainer.Config import *
 from trainer import Model
 from trainer.Status import *
@@ -13,7 +13,7 @@ import torch.nn as nn
 def save_model(model, train_data, target_data, pred_final, accuracy):
     torch.save(model.state_dict(), './model/detect_eye_blink_model.pth')
     f = open("./model/detect_eye_blink_model train result.txt", "w")
-    f.write("모델 정확도: {:.1f}\n".format(accuracy.item()*100))
+    f.write(f"모델 정확도: {accuracy.item()*100:.1f}\n")
     f.write(" EAR값  |  타겟  |  예측 |  정답  |\n")
     for i in range(len(train_data)):
         f.write("  {:.2f}  |    {}    |    {}    |  {} |\n"
@@ -45,7 +45,7 @@ def trainData():
     prediction = model(X)
     pred_final = (prediction > 0.5).float()
     accuracy = (pred_final == Y).float().mean()
-    print('train complete, accuracy = {:.1f}%'.format(accuracy.item()*100))
+    print(f"train complete, accuracy = {accuracy.item()*100:.1f}%")
     save_model(model, train_data, target_data, pred_final, accuracy)
     play()
 

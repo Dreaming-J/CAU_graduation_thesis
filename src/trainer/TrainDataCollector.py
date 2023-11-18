@@ -1,10 +1,10 @@
 import os, sys
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
-from module.EAR import *
+from module.EAR import eye_aspect_ratio
 from trainer.Config import *
 from trainer.Status import *
-from util.SoundPlayer import *
+from util.SoundPlayer import play
 
 
 def getOpenEyeData(shape_eye):
@@ -16,7 +16,7 @@ def getOpenEyeData(shape_eye):
         data_count += 1
 
     if data_count == data_size - data_size/2:
-        print("Complete collect {} open eye data".format(int(data_size/2)))
+        print(f"Complete collect {int(data_size/2)} open eye data")
         play()
         return COLLECTING_CLOSED_EYE_DATA
 
@@ -32,7 +32,7 @@ def getClosedEyeData(shape_eye):
         data_count += 1
 
     if data_count == data_size:
-        print("Complete collect {} closed eye data".format(int(data_size/2)))
+        print(f"Complete collect {int(data_size/2)} closed eye data")
         play()
         return TRAINING_DATA
 
