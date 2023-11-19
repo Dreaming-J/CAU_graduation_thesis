@@ -1,4 +1,4 @@
-from module.Alarm import alarm
+from module.Alarm import threadAlarm
 from module.Detector import detectEyes
 from module.Drawer import drawEyes
 from module.Drawer import drawText
@@ -7,16 +7,22 @@ from util.Constant import *
 from util.SoundPlayer import play
 from util.Variable import *
 import cv2
-import time
-import threading
+
+
+def init():
+    ret, frame = webcam.read()
+    if ret is False:
+        return
+    play("car_open")
+    print("Start Application!")
+    cv2.imshow("Driver Drowsiness Detection", frame)
 
 
 def isContinue():
     return not cv2.waitKey(1) & 0xFF == ESC
 
 
-play("car_open")
-print("Start Application!")
+init()
 while isContinue():
     ret, frame = webcam.read()
     if ret is False:
@@ -27,16 +33,11 @@ while isContinue():
     drawEyes(frame, shape_eyes)
 
     (eye_status_msg, isclosed) = predictWithCompensator(model, shape_eyes, isclosed)
-    drawText(frame, f"EYE STATUS: {eye_status_msg}", (0, 20))
+    drawText(frame, f"Eye Status: {eye_status_msg}", (0, 20))
 
-    if isclosed is False:
-        start_closed_eye = time.time()
-        elapsed_time = 0
-    elif isclosed is True:
-        elapsed_time = time.time() - start_closed_eye
-        thread = threading.Thread(target=alarm, args=(elapsed_time,))
-        thread.start()
+    (alarm_status, elapsed_time) = threadAlarm(isclosed)
     drawText(frame, f"Elapsed Time: {elapsed_time:.1f}s", (0, 50))
+    drawText(frame, f"Alarm Status: {alarm_status[0]}", (0, 80), alarm_status[1])
 
     cv2.imshow("Driver Drowsiness Detection", frame)
 webcam.release()

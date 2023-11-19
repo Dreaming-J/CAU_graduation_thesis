@@ -5,6 +5,7 @@ from trainer import Model
 import dlib
 import cv2
 import torch
+import time
 
 # dlib 얼굴 추출기 및 랜드마크 예측기
 print("loading face landmarks predictor...")
@@ -21,9 +22,12 @@ model = Model.MyModel()
 model.load_state_dict(torch.load("./model/detect_eye_blink_model.pth"))
 model.eval()
 
-# 시간 측정 변수
-start_closed_eye = 0
-elapsed_time = 0
-
 # 눈 깜빡임 감지 변수
 isclosed = None
+
+# 눈 감긴 시간 변수
+start_closed_eye = time.time()
+elapsed_time = 0
+
+#알람 변수
+isRinging = False
