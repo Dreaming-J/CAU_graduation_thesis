@@ -1,5 +1,8 @@
-# OpenCV와 dlib을 이용한 졸음 운전 탐지
+# OpenCV와 dlib을 이용한 졸음 탐지
 중앙대학교 전자전기공학부 종합설계
+
+## 참고 문헌
+- [Real-Time Eye Blink Detection using Facial Landmarks](https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/05.pdf)
 
 ## 참고 코드
 
