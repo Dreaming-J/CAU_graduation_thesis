@@ -1,12 +1,12 @@
-from util.Constant import *
-from util.SoundPlayer import *
-from util.Variable import *
 from module.Detector import *
 from module.Drawer import *
 from module.Predictor import *
 from trainer.Status import *
 from trainer.TrainModel import *
 from trainer.TrainDataCollector import *
+from util.Constant import *
+from util.SoundPlayer import *
+from util.Variable import *
 import cv2
 
 status = START

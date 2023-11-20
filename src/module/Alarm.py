@@ -3,9 +3,10 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 
 from util.SoundPlayer import play
 from util.Constant import *
-from util.Variable import *
 import time
 import threading
+
+isRinging = False
 
 
 def alarm(elapsed_time):
@@ -37,15 +38,8 @@ def getAlarmStatus(elapsed_time):
     return alarm_status
 
 
-def threadAlarm(isclosed):
-    global start_closed_eye, elapsed_time
-    if isclosed is False:
-        start_closed_eye = time.time()
-        elapsed_time = 0
-    elif isclosed is True:
-        elapsed_time = time.time() - start_closed_eye
-
+def threadAlarm(elapsed_time):
     alarm_thread = threading.Thread(target=alarm, args=(elapsed_time,))
     alarm_thread.start()
 
-    return getAlarmStatus(elapsed_time), elapsed_time
+    return getAlarmStatus(elapsed_time)

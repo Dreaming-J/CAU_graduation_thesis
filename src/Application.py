@@ -3,6 +3,7 @@ from module.Detector import detectEyes
 from module.Drawer import drawEyes
 from module.Drawer import drawText
 from module.Predictor import predictWithCompensator
+from module.Timer import getElapsedTime
 from util.Constant import *
 from util.SoundPlayer import play
 from util.Variable import *
@@ -35,9 +36,11 @@ while isContinue():
     (eye_status_msg, isclosed) = predictWithCompensator(model, shape_eyes, isclosed)
     drawText(frame, f"Eye Status: {eye_status_msg}", (0, 20))
 
-    (alarm_status, elapsed_time) = threadAlarm(isclosed)
+    elapsed_time = getElapsedTime(isclosed)
     drawText(frame, f"Elapsed Time: {elapsed_time:.1f}s", (0, 50))
-    drawText(frame, f"Alarm Status: {alarm_status[0]}", (0, 80), alarm_status[1])
+
+    (alarm_msg, alarm_color) = threadAlarm(elapsed_time)
+    drawText(frame, f"Alarm Status: {alarm_msg}", (0, 80), alarm_color)
 
     cv2.imshow("Driver Drowsiness Detection", frame)
 webcam.release()

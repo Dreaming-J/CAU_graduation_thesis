@@ -22,12 +22,5 @@ model = Model.MyModel()
 model.load_state_dict(torch.load("./model/detect_eye_blink_model.pth"))
 model.eval()
 
-# 눈 깜빡임 감지 변수
+# 변수 초기값
 isclosed = None
-
-# 눈 감긴 시간 변수
-start_closed_eye = time.time()
-elapsed_time = 0
-
-#알람 변수
-isRinging = False
