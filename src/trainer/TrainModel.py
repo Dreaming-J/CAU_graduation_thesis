@@ -13,14 +13,15 @@ import torch.nn as nn
 def save_model(model, train_data, target_data, pred_final, accuracy):
     torch.save(model.state_dict(), './model/detect_eye_blink_model.pth')
     f = open("./model/detect_eye_blink_model train result.txt", "w")
-    f.write(f"모델 정확도: {accuracy.item()*100:.1f}\n")
-    f.write(" EAR값  |  타겟  |  예측 |  정답  |\n")
+    f.write(f"모델 정확도: {accuracy.item()*100:.1f}\n\n")
+    f.write("  좌우 EAR값  |  타겟  |  예측 |  정답  |\n")
     for i in range(len(train_data)):
-        f.write("  {:.2f}  |    {}    |    {}    |  {} |\n"
-                .format(float(train_data[i]),
+        f.write(" {:05.2f} | {:05.2f} |    {}    |    {}    |  {:5s} |\n"
+                .format(float(train_data[i][0]),
+                        float(train_data[i][1]),
                         int(target_data[i]),
                         int(pred_final[i]),
-                        bool(int(target_data[i]) == int(pred_final[i]))))
+                        str(bool(int(target_data[i]) == int(pred_final[i]))).rjust(5, ' ')))
 
 
 def trainData():
@@ -32,9 +33,9 @@ def trainData():
 
     model = Model.MyModel()
     loss_func = nn.BCELoss()
-    optimizer = torch.optim.SGD(model.parameters(), lr=0.015)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
-    for epoch in range(2000):
+    for epoch in range(3000):
         prediction = model(X)
         loss = loss_func(prediction, Y)
 

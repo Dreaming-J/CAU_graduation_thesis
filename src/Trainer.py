@@ -33,9 +33,8 @@ while isContinue():
         status = COLLECTING_OPEN_EYE_DATA
 
     elif status == COLLECTING_OPEN_EYE_DATA:
-        for shape_eye in shape_eyes:
-            status = getOpenEyeData(shape_eye)
-            cv2.waitKey(1)
+        status = getOpenEyeData(shape_eyes)
+        cv2.waitKey(1)
         if status == COLLECTING_CLOSED_EYE_DATA:
             print("Press Enter key to collect closed eye data")
             msg = "collecting closed eye data..."
@@ -43,9 +42,8 @@ while isContinue():
             play()
 
     elif status == COLLECTING_CLOSED_EYE_DATA:
-        for shape_eye in shape_eyes:
-            status = getClosedEyeData(shape_eye)
-            cv2.waitKey(1)
+        status = getClosedEyeData(shape_eyes)
+        cv2.waitKey(1)
 
     elif status == TRAINING_DATA:
         model, accuracy, status = trainData()

@@ -5,9 +5,11 @@ class MyModel(nn.Module):
     def __init__(self):
         super().__init__()
         self.layer = nn.Sequential(
-            nn.Linear(1, 15),
+            nn.Linear(2, 15),
+            nn.ReLU(),
+            nn.Linear(15, 5),
             nn.Sigmoid(),
-            nn.Linear(15, 1),
+            nn.Linear(5, 1),
             nn.Sigmoid(),
         )
 
