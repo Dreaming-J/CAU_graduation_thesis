@@ -5,7 +5,7 @@ def shuffle(x, y):
     idx = np.arange(x.shape[0])
     np.random.shuffle(idx)
 
-    x = x[idx]
-    y = y[idx]
+    X = x[idx]
+    Y = y[idx]
 
-    return x, y
+    return X, Y
