@@ -27,7 +27,6 @@ def save_model(model, train_data, target_data, pred_final, accuracy):
 def trainData():
     global train_data, target_data
 
-    (train_data, target_data) = shuffle(train_data, target_data)
     X = torch.tensor(train_data).to(torch.float32)
     Y = torch.tensor(target_data).to(torch.float32)
 
@@ -36,6 +35,8 @@ def trainData():
     optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
 
     for epoch in range(3000):
+        (X, Y) = shuffle(X, Y)
+
         prediction = model(X)
         loss = loss_func(prediction, Y)
 
