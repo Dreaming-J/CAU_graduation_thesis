@@ -20,8 +20,7 @@ def isClosed(model, shape_eyes):
     return "OPEN", prediction
 
 
-def predictWithCompensator(model, shape_eyes, current=None):
-    previous = current
+def predictWithCompensator(model, shape_eyes, previous=None):
     (eye_status_msg, current) = isClosed(model, shape_eyes)
 
     if current is None:
