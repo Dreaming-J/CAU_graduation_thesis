@@ -15,6 +15,4 @@
 - 2023년 1학기 지능형 영상처리 수업 자료(유성욱 교수님)
   - AI-5_MNIST 숫자 인식 신경망 Python 구현 [ppt](./original/AI-5_MNIST_숫자_인식_신경망_Python_구현.pptx)
 <br><br>
-- Real-Time Eye Blink Detection using Facial Landmarks - [링크](https://vision.fe.uni-lj.si/cvww2016/proceedings/papers/05.pdf)
-<br><br>
 - Understanding the “eye aspect ratio” (EAR) - [링크](https://pyimagesearch.com/2017/04/24/eye-blink-detection-opencv-python-dlib/), [코드](./original/Understanding_the_“eye_aspect_ratio”_(EAR).py/)
